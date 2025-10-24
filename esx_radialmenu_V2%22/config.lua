@@ -3,10 +3,13 @@
 -- Lizenziert unter GPLv3: https://www.gnu.org/licenses/gpl-3.0.html
 -- Discord Support: https://discord.gg/AX5arD3r
 
+ESX = exports["es_extended"]:getSharedObject()
+PlayerData = {}
+
 CreateThread(function()
     while not ESX do
-        ESX = exports["es_extended"]:getSharedObject()
         Wait(100)
+        ESX = exports["es_extended"]:getSharedObject()
     end
     while not ESX.GetPlayerData().job do
         Wait(100)
@@ -19,8 +22,12 @@ RegisterNetEvent("esx:playerLoaded", function(xPlayer)
 end)
 
 RegisterNetEvent("esx:setJob", function(job)
+    if type(PlayerData) ~= "table" then
+        PlayerData = {}
+    end
     PlayerData.job = job
 end)
+
 
 Config = {}
 
